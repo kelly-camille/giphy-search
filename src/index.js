@@ -1,39 +1,35 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-
-// Business Logic
-function getSearch(keyword) {
-  let requestSearch = new XMLHttpRequest();
-  console.log(keyword);
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=yxz9s2clvyAa3M7ajxUmlHiWe6A8p4US&q=${keyword}&limit=50&offset=0&rating=r&lang=en`;
-
-  requestSearch.addEventListener("loadend", function() {
-    const responseSearch = JSON.parse(this.responseText);
-    if (this.status === 200) {
-      printElements(responseSearch, keyword);
-    }
+import CryptoService from './project.js';
+function getCrypto() {
+  let promise = CryptoService.getCrypto();
+  promise.then(function(cryptoDataArray) {
+    printElements(cryptoDataArray);
+  }, function(errorArray) {
+    printError(errorArray);
   });
-  requestSearch.open("GET", url, true);
-  requestSearch.send();
 }
 
-// UI Logic
 
-function printElements(apiResponse, keyword) {
-  document.getElementById("gifResult").setAttribute("src", apiResponse.data[Math.floor(Math.random() * 50)].images.original.url);
-  document.getElementById("keywordOutput").innerText = `Keyword: ${keyword}`;
+// UI Logic ----------
+
+function printElements(apiResponse) {
+  console.log("hello")
+  document.getElementById('cryptoName1').innerText = `${apiResponse.data[0].name}`;
 }
 
-function handleSubmission(event) {
+function printError(apiResponse) {
+  document.getElementById("cryptoName1").innerText = `THERE WAS AN ERROR ACCESSING CURRENCY NAME DATA for ${apiResponse.error[2]}: ${apiResponse.error[0].status} ${apiResponse.error[0].statusText}: ${apiResponse.error[1].message}`;
+}
+
+function formHandler(event) {
   event.preventDefault();
-  const keyword = document.getElementById("keyword").value;
-  console.log(keyword);
-  document.getElementById('keyword').value = null;
-  console.log(keyword);
-  getSearch(keyword);
+  getCrypto();
 }
+
 
 window.addEventListener("load", function() {
-  document.querySelector('form#search').addEventListener("submit", handleSubmission);
-});
+  document.querySelector("#button").addEventListener("submit", formHandler)
+})
+  

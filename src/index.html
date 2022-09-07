@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Giphy Search</title>
+
+  <title>Cryto Tracker</title>
 </head>
 <body>
-  <h1>Find any GIF</h1>
-  <form id="search">
-      <label for="keyword">Enter a keyword to filter through Giphy</label>
-  <input id="keyword" type="text" name="keyword">
-  <button type="submit">Search</button>
-  </form>
-  <img id="gifResult">
-  <p id="keywordOutput"></p>
+  <div class="container">
+    <form>
+      <h1>Top Cryptocurrencies</h1>
+      <h2>Rank 1</h2>
+      <h3 id="cryptoName1"></h3>
+      <p id="pPrice1">Current Market Price: $<span id="fillPrice1"></span>.</p>
+      <br>
+      <br>
+      <h2>Rank 2</h2>
+      <h3 id="cryptoName2"></h3>
+      <p id="pPrice2">Current Market Price: $<span id="fillPrice2"></span>.</p>
+      <br>
+      <br>
+      <h2>Rank 3</h2>
+      <h3 id="cryptoName3"></h3>
+      <p id="pPrice3">Current Market Price: $<span id="fillPrice3"></span>.</p>
+      <button id="button" type="submit" class="btn btn-dark">Load?</button>
+    </form>
+  </div>
 </body>
 </html>
