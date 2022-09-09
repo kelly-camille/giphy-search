@@ -13,14 +13,12 @@ function getCrypto() {
 
 
 // UI Logic ----------
-
-function printElements(apiResponse) {
-  console.log("hello")
-  document.getElementById('cryptoName1').innerText = `${apiResponse.data[0].name}`;
-}
-
-function printError(apiResponse) {
-  document.getElementById("cryptoName1").innerText = `THERE WAS AN ERROR ACCESSING CURRENCY NAME DATA for ${apiResponse.error[2]}: ${apiResponse.error[0].status} ${apiResponse.error[0].statusText}: ${apiResponse.error[1].message}`;
+ 
+function printElements(data) {
+  console.log(data[0][1])
+  document.getElementById('cryptoName1').innerText = `${[data[0][0].name]}`;
+  document.getElementById('cryptoName2').innerText = `${[data[0][1].name]}`;
+  document.getElementById('cryptoName3').innerText = `${[data[0][2].name]}`;
 }
 
 function formHandler(event) {
@@ -30,6 +28,5 @@ function formHandler(event) {
 
 
 window.addEventListener("load", function() {
-  document.querySelector("#button").addEventListener("submit", formHandler)
-})
-  
+  document.querySelector("form").addEventListener("submit", formHandler);
+}) 
